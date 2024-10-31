@@ -1,0 +1,223 @@
+﻿<UserControl x:Class="PostTech.Views.WorkspaceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PostTech.Views"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border CornerRadius="0 0 20 20" Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="0.7"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Border Background="#7DA0CA" Height="1" Grid.Row="0" VerticalAlignment="Bottom"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Command="{Binding OpenStoreView}"
+                Style="{StaticResource MyButtonStyle}">
+                Mağaza
+            </Button>
+
+            <Button
+                Grid.Column="1"
+                Style="{StaticResource MyButtonStyle}">
+                İstifadəçi
+            </Button>
+
+            <Button
+                Grid.Column="2"
+                Style="{StaticResource MyButtonStyle}">
+                İnteqrasiya
+            </Button>
+
+            <TextBlock
+                Grid.Column="3"
+                Text="Tarix Aralığı:"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="White"
+                FontSize="14">
+            </TextBlock>
+
+            <Border
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                CornerRadius="10"
+                Width="130"
+                Height="40"
+                Background="#052659"
+                Grid.Column="4">
+                <DatePicker
+                    Width="90"
+                    Height="35"
+                    FontSize="14"
+                    Foreground="white"
+                    SelectedDate="{Binding startDate}">
+                    <DatePicker.CalendarStyle>
+                        <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignDatePickerCalendarPortrait}">
+                            <Setter Property="Background" Value="#052659"/>
+                            <Style.Resources>
+                                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#052659" />
+                            </Style.Resources>
+                        </Style>
+                    </DatePicker.CalendarStyle>
+                </DatePicker>
+            </Border>
+
+            <Border
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                CornerRadius="10"
+                Width="130"
+                Height="40"
+                Background="#052659"
+                Grid.Column="5">
+                <DatePicker
+                    Width="90"
+                    Height="35"
+                    FontSize="14"
+                    Foreground="white"
+                    SelectedDate="{Binding endDate}">
+                    <DatePicker.CalendarStyle>
+                        <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignDatePickerCalendarPortrait}">
+                            <Setter Property="Background" Value="#052659"/>
+                            <Style.Resources>
+                                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#052659" />
+                            </Style.Resources>
+                        </Style>
+                    </DatePicker.CalendarStyle>
+                </DatePicker>
+            </Border>
+
+            <Button
+                Grid.Column="6"
+                Style="{StaticResource MyButtonStyle}">
+                Yenilə
+            </Button>
+
+            <Button
+                Grid.Column="7"
+                Style="{StaticResource MyButtonStyle}">
+                Kopya
+            </Button>
+
+            <Button
+                Grid.Column="8"
+                Style="{StaticResource MyButtonStyle}">
+                X Hesabat
+            </Button>
+
+            <Button
+                Grid.Column="9"
+                Style="{StaticResource MyButtonStyle}">
+                Günü Bağla
+            </Button>
+        </Grid>
+
+        <DataGrid 
+            Width="1180"
+            Height="560"
+            Background="Transparent"
+            Grid.Row="1"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserResizeRows="False"
+            CanUserResizeColumns="False"
+            CanUserReorderColumns="False"
+            CanUserSortColumns="False"
+            IsReadOnly="True"
+            ItemsSource="{Binding ReceiptDatas}"
+            GridLinesVisibility="None"
+            SelectionMode="Single"
+            SelectionUnit="CellOrRowHeader">
+
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Margin" Value="10 10 0 0"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+
+                <Style x:Key="NoSelectionRowStyle" TargetType="DataGridRow">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="IsSelected" Value="False"/>
+                    <Setter Property="Opacity" Value="1"/>
+                </Style>
+
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+                </Style>
+
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Margin" Value="0 5 0 5"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Kassaçı Adı" Binding="{Binding CashierName}" Width="*"/>
+                <DataGridTextColumn Header="Tip" Binding="{Binding Type}" Width="*"/>
+                <DataGridTextColumn Header="Sənəd №" Binding="{Binding DocumentNo}" Width="*"/>
+                <DataGridTextColumn Header="Tarix" Binding="{Binding Date, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}" Width="130"/>
+                <DataGridTextColumn Header="Məbləğ" Binding="{Binding Amount}" Width="*"/>
+                <DataGridTextColumn Header="ƏDV" Binding="{Binding EDV}" Width="*"/>
+                <DataGridTextColumn Header="ƏDV Xaric" Binding="{Binding EDVExcluded}" Width="*"/>
+                <DataGridTextColumn Header="Endirim" Binding="{Binding Discount}" Width="*"/>
+                <DataGridTextColumn Header="Ödənən" Binding="{Binding Paid}" Width="*"/>
+                <DataGridTextColumn Header="Z №" Binding="{Binding ZNo}" Width="*"/>
+                <DataGridTextColumn Header="Göndərilmə" Binding="{Binding Delivery}" Width="*"/>
+                <DataGridTextColumn Header="Göndərilmə Tarixi" Binding="{Binding DeliveryDate, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}" Width="130"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid 
+            Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        </Grid>
+    </Grid>
+</UserControl>

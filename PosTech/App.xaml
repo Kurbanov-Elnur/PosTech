@@ -1,0 +1,39 @@
+﻿<Application x:Class="PostTech.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PostTech"
+             xmlns:View="clr-namespace:PostTech.Views"
+             xmlns:ViewModel="clr-namespace:PostTech.ViewModels">
+    <Application.Resources>
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type ViewModel:MainViewModel}">
+                <View:MainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModel:LoginViewModel}">
+                <View:LoginView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModel:WorkspaceViewModel}">
+                <View:WorkspaceView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type ViewModel:StoreViewModel}">
+                <View:StoreView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type ViewModel:UsersViewModel}">
+                <View:UsersView/>
+            </DataTemplate>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/MyButtonStyle.xaml"/>
+                <ResourceDictionary Source="Style/MyInputStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

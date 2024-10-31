@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="MyInputBorderStyle" TargetType="Border">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Background" Value="#3A2F90" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Width" Value="235" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
+
+    <Style x:Key="MyInputTextBoxStyle" TargetType="TextBox" >
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="CaretBrush" Value="White"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <ScrollViewer x:Name="PART_ContentHost" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

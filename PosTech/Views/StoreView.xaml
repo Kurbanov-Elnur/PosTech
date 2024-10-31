@@ -1,0 +1,161 @@
+﻿<UserControl x:Class="PostTech.Views.StoreView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PostTech.Views"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1200">
+    <Grid>
+        <Border CornerRadius="0 0 20 20" Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="0.7"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Grid Width="1000" Height="600">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Cursor="Hand" Height="60" Background="Transparent" BorderBrush="Transparent" Command="{Binding Back}">
+                <md:PackIcon Kind="ArrowLeftBoldCircleOutline" Width="30" Height="30" Foreground="White"/>
+            </Button>
+
+            <Label Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center">
+                Mağaza İdarə
+            </Label>
+
+            <Border Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="2" Width="245" VerticalAlignment="Center" Height="325" Grid.RowSpan="5" Background="#3A2F90" CornerRadius="10" Margin="0 0 0 15">
+                <ListBox ItemsSource="{Binding Stores}" SelectedItem="{Binding SelectedStore}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Company.CompanyCode}" Foreground="White" FontSize="18" HorizontalAlignment="Center" Margin="10 0 0 0"/>
+                                <TextBlock Text="{Binding Company.CompanyName}" Foreground="White" FontSize="18" HorizontalAlignment="Center" Margin="10 0 0 0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+
+            <Grid Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Width="80" Style="{StaticResource MyButtonStyle}" Command="{Binding AddStore}">
+                    Əlavə Et
+                </Button>
+
+                <Button Grid.Column="1" Width="80" Style="{StaticResource MyButtonStyle}" Command="{Binding RemoveStore}">
+                    Sil
+                </Button>
+
+                <Button Grid.Column="2" Width="80" Style="{StaticResource MyButtonStyle}">
+                    Yadda Saxla
+                </Button>
+            </Grid>
+
+            <Label Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="19" Margin="0 0 18 0" Foreground="White">
+                Şirkət Kodu:
+            </Label>
+
+            <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource MyInputBorderStyle}">
+                <TextBox Text="{Binding EditableStore.BranchName}" Style="{StaticResource MyInputTextBoxStyle}"/>
+            </Border>
+
+            <Label Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Margin="0 0 18 0" Foreground="White">
+                Filial Adı:
+            </Label>
+
+            <Border Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource MyInputBorderStyle}">
+                <TextBox Text="{Binding EditableStore.BranchName}" Style="{StaticResource MyInputTextBoxStyle}"/>
+            </Border>
+            
+            <Label Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Margin="0 0 14 0" Foreground="White">
+                Filial Kodu:
+            </Label>
+
+            <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource MyInputBorderStyle}">
+                <TextBox Text="{Binding EditableStore.BranchCode}" Style="{StaticResource MyInputTextBoxStyle}"/>
+            </Border>
+
+            <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Foreground="White">
+                Şəhər Adı:
+            </Label>
+
+            <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource MyInputBorderStyle}">
+                <TextBox Text="{Binding EditableStore.CityName}" Style="{StaticResource MyInputTextBoxStyle}"/>
+            </Border>
+
+            <Label Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Margin="0 0 45 0" Foreground="White">
+                Telefon:
+            </Label>
+
+            <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource MyInputBorderStyle}">
+                <TextBox Text="{Binding EditableStore.Phone}" Style="{StaticResource MyInputTextBoxStyle}"/>
+            </Border>
+
+            <Label Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Margin="0 0 34 0" Foreground="White">
+                Status:
+            </Label>
+
+            <Border Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource MyInputBorderStyle}">
+                <TextBox Text="{Binding EditableStore.Status}" Style="{StaticResource MyInputTextBoxStyle}"/>
+            </Border>
+
+            <Label Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Margin="0 0 50 0" Foreground="White">
+                Ünvan:
+            </Label>
+
+            <Border Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5" Width="610" Style="{StaticResource MyInputBorderStyle}">
+                <TextBox Text="{Binding EditableStore.Address}" Style="{StaticResource MyInputTextBoxStyle}"/>
+            </Border>
+
+            <Label Grid.Row="5" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Margin="0 0 50 0" Foreground="White">
+                Mətin:
+            </Label>
+
+            <Border Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="5" Width="610" Height="80" Style="{StaticResource MyInputBorderStyle}">
+                <TextBox Height="70" TextWrapping="Wrap" Text="{Binding EditableStore.Description}" Style="{StaticResource MyInputTextBoxStyle}"/>
+            </Border>
+
+            <TextBlock
+                Grid.Row="7"
+                Grid.ColumnSpan="8"
+                Text="{Binding ErrorMessage}" 
+                FontSize="15" 
+                Foreground="Red" 
+                HorizontalAlignment="Center" 
+                Margin="0,10,0,20" 
+                TextWrapping="Wrap">
+
+            </TextBlock>
+        </Grid>
+    </Grid>
+</UserControl>

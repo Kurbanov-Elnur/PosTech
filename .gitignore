@@ -1,0 +1,69 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userprefs
+*.sln.ide
+*.sln.docstates
+
+# Игнорировать все файлы настроек
+appsettings.*
+*.appsettings.*
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bin/
+obj/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+packages/
+*.nuget/
+
+# Visual Studio Code
+.vscode/
+
+# User-specific files
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.jfmproj
+*.pdb
+*.ilk
+*.map
+*.scc
+
+# Rider
+.idea/
+
+# Other files
+*.log
+*.vsix
+*.docfx
+*.cache
+*.pdb
+*.ilk
+*.map
+*.scc
+
+# Publish results
+PublishProfiles/
+
+# Environment files
+*.env
+*.local
+
+# Entity Framework Core
+*.db
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# Logs
+*.log

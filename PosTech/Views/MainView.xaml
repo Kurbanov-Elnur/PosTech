@@ -1,0 +1,60 @@
+﻿<Window x:Class="PostTech.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PostTech.Views"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainView" Height="700" Width="1200"
+        WindowStyle="None" 
+        AllowsTransparency="True" 
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.08*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border
+            Background="#0a1227"
+            CornerRadius="20 20 0 0"
+            MouseLeftButtonDown="DragWindow">
+
+            <Grid>
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Margin="10 0 0 0">
+                    <Run Text="Pos" Foreground="White"/>
+                    <Run Text="Tech" Foreground="#c82333"/>
+                </TextBlock>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button
+                        Width="30"
+                        Height="30"
+                        Foreground="white"
+                        Click="Minimize"
+                        Style="{DynamicResource MaterialDesignIconButton}">
+                        <md:PackIcon Kind="Minimize"/>
+                    </Button>
+
+                    <Button
+                        Width="30"
+                        Height="30"
+                        Foreground="white"
+                        Click="Close"
+                        Style="{DynamicResource MaterialDesignIconButton}">
+                        <md:PackIcon Kind="Logout"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <ContentControl Grid.Row="1" Content="{Binding CurrentView}"/>
+    </Grid>
+</Window>
