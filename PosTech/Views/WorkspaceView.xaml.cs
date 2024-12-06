@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace PostTech.Views
+namespace PosTech.Views
 {
     public partial class WorkspaceView : UserControl
     {

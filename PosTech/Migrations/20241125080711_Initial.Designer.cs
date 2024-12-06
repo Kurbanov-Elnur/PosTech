@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PostTech.Data.Contexts;
+using PosTech.Data.Contexts;
 
 #nullable disable
 
 namespace PosTech.Migrations
 {
     [DbContext(typeof(PostAppContext))]
-    [Migration("20241028115003_Initial")]
+    [Migration("20241125080711_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -38,19 +38,12 @@ namespace PosTech.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("TaxCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyCode")
                         .IsUnique();
 
                     b.HasIndex("CompanyName")
-                        .IsUnique();
-
-                    b.HasIndex("TaxCode")
                         .IsUnique();
 
                     b.ToTable("Companies");
@@ -151,9 +144,16 @@ namespace PosTech.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TaxCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("TaxCode")
+                        .IsUnique();
 
                     b.ToTable("Stores");
                 });

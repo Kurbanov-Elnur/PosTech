@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualBasic.Logging;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Microsoft.VisualBasic.Logging;
 using PosTech.Data.Models;
+using PosTech.Messages;
 using PosTech.Services.Interfaces;
-using PostTech.Data.Models;
-using PostTech.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -13,12 +13,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace PostTech.ViewModels;
+namespace PosTech.ViewModels;
 
 class StoreViewModel : BindableBase
 {
     private readonly INavigationService _navigationService;
     private readonly IStoresService _storesService;
+    private readonly ICompanyService _companyService;
+    private readonly IMessenger _messenger;
 
     private string _errorMessage;
     public string ErrorMessage
@@ -26,7 +28,6 @@ class StoreViewModel : BindableBase
         get => _errorMessage;
         set => SetProperty(ref _errorMessage, value);
     }
-
 
     private Store _editableStore;
     public Store EditableStore
@@ -44,37 +45,46 @@ class StoreViewModel : BindableBase
             SetProperty(ref _selectedStore, value);
             if (_selectedStore != null)
             {
-                EditableStore = new Store
-                {
-                    BranchCode = _selectedStore.BranchCode,
-                    BranchName = _selectedStore.BranchName,
-                    CityName = _selectedStore.CityName,
-                    Phone = _selectedStore.Phone,
-                    Status = _selectedStore.Status,
-                    Address = _selectedStore.Address,
-                    Description = _selectedStore.Description,
-                    Company = new Company()
-                    {
-                        CompanyCode = _selectedStore.Company.CompanyCode,
-                        CompanyName = _selectedStore.Company.CompanyName,
-                        TaxCode = _selectedStore.Company.TaxCode
-                    },
-                    CompanyId = _selectedStore.CompanyId
-                };
+                EditableStore = _selectedStore;
+            }
+        }
+    }
+
+    private Company _selectedCompany;
+    public Company SelectedCompany
+    {
+        get => _selectedCompany;
+        set
+        {
+            SetProperty(ref _selectedCompany, value);
+            if (EditableStore != null && _selectedCompany != null)
+            {
+                EditableStore.CompanyId = _selectedCompany.Id;
+                EditableStore.Company = _selectedCompany;
             }
         }
     }
 
     public ObservableCollection<Store> Stores { get; set; } = new();
+    public ObservableCollection<Company> Companies { get; set; } = new();
 
-    public StoreViewModel(INavigationService navigationService, IStoresService storesService)
+    public StoreViewModel(INavigationService navigationService, IStoresService storesService, ICompanyService companyService, IMessenger messenger)
     {
         _navigationService = navigationService;
         _storesService = storesService;
+        _companyService = companyService;
+        _messenger = messenger;
+
         SelectedStore = new();
         EditableStore = new();
 
         InitializeStores();
+
+        _messenger.Register<DataMessage>(this, message =>
+        {
+            if (message.Data as ObservableCollection<Company> != null)
+                Companies = message.Data as ObservableCollection<Company>;
+        });
 
         AddStore = new DelegateCommand(async () =>
         {
@@ -91,8 +101,22 @@ class StoreViewModel : BindableBase
             }
         });
 
-        RemoveStore = new DelegateCommand(() =>
+        RemoveStore = new DelegateCommand(async () =>
         {
+            try
+            {
+                var response = await _storesService.DeleteStore(EditableStore);
+                if(response)
+                {
+                    Stores.Remove(EditableStore);
+                }
+
+                EditableStore = new Store();
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = e.Message;
+            }
         });
 
         Back = new DelegateCommand(() =>
@@ -104,6 +128,7 @@ class StoreViewModel : BindableBase
     private async void InitializeStores()
     {
         Stores = await _storesService.InitializeStoresAsync();
+        Companies = await _companyService.InitializeCompanyAsync();
     }
 
     public DelegateCommand AddStore { get; private set; }

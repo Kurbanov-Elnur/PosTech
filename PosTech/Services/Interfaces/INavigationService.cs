@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostTech.Services.Interfaces;
+namespace PosTech.Services.Interfaces;
 
 public interface INavigationService
 {

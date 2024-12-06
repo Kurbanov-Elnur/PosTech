@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using PostTech.Messages;
-using PostTech.Services.Interfaces;
+using PosTech.Messages;
+using PosTech.Services.Interfaces;
+using PosTech;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostTech.Services.Classes;
+namespace PosTech.Services.Classes;
 
 class NavigationService : INavigationService
 {

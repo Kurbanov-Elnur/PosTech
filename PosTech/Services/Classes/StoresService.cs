@@ -3,8 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using PosTech.Data.Models;
 using PosTech.Services.Interfaces;
-using PostTech.Data.Contexts;
-using PostTech.Data.Models;
+using PosTech.Data.Contexts;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -22,31 +21,14 @@ class StoresService : IStoresService
 
     public async Task<Store> AddStore(Store editableStore)
     {
-        Store newStore;
-        var digitsOnlyRegex = new Regex(@"^\d+$");
-
-        if (!digitsOnlyRegex.IsMatch(editableStore.Phone) || editableStore.Phone.Length != 12)
-            throw new ArgumentException("Telefon yalnız rəqəmlərdən ibarət olmalı və 12 simvol uzunluğunda olmalıdır.");
-
-        if (!digitsOnlyRegex.IsMatch(editableStore.Company.CompanyCode) ||
-            editableStore.Company.CompanyCode.Length == 0 ||
-            editableStore.Company.CompanyCode.Length > 4)
-            throw new ArgumentException("Firma Kodu yalnız rəqəmlərdən ibarət olmalıdır və uzunluğu 1-dən 4-ə qədər olmalıdır.");
-
-        if (!digitsOnlyRegex.IsMatch(editableStore.BranchCode) ||
-            editableStore.BranchCode.Length == 0 ||
-            editableStore.BranchCode.Length > 4)
-            throw new ArgumentException("Filial Kodu yalnız rəqəmlərdən ibarət olmalıdır və uzunluğu 1-dən 4-ə qədər olmalıdır.");
-
-        if (!digitsOnlyRegex.IsMatch(editableStore.Company.TaxCode) ||
-            editableStore.Company.TaxCode.Length == 0 ||
-            editableStore.Company.TaxCode.Length > 20)
-            throw new ArgumentException("Vergi Kodu yalnız rəqəmlərdən ibarət olmalıdır və uzunluğu 1-dən 20-ə qədər olmalıdır.");
+        ValidateCode(editableStore.Phone, "Telefon", 12, 12);
+        ValidateCode(editableStore.Company.CompanyCode, "Firma Kodu", 1, 4);
+        ValidateCode(editableStore.BranchCode, "Filial Kodu", 1, 4);
+        ValidateCode(editableStore.TaxCode, "Vergi Kodu", 1, 20);
 
         var existingCompany = await _context.Companies
             .FirstOrDefaultAsync(c => c.CompanyCode == editableStore.Company.CompanyCode ||
-                                       c.CompanyName == editableStore.Company.CompanyName ||
-                                       c.TaxCode == editableStore.Company.TaxCode);
+                                       c.CompanyName == editableStore.Company.CompanyName);
 
         if (existingCompany == null)
         {
@@ -54,7 +36,6 @@ class StoresService : IStoresService
             {
                 CompanyCode = editableStore.Company.CompanyCode,
                 CompanyName = editableStore.Company.CompanyName,
-                TaxCode = editableStore.Company.CompanyCode,
             };
 
             _context.Companies.Add(existingCompany);
@@ -63,45 +44,75 @@ class StoresService : IStoresService
 
         var exists = await _context.Stores.AnyAsync(s =>
             s.CompanyId == existingCompany.Id &&
-            (s.BranchCode == editableStore.BranchCode ||
-             s.BranchName == editableStore.BranchName));
+            (s.BranchCode == editableStore.BranchCode || s.BranchName == editableStore.BranchName));
 
         if (exists)
             throw new InvalidOperationException("Belə bir mağaza artıq mövcuddur.");
 
+        var newStore = new Store
+        {
+            BranchCode = editableStore.BranchCode,
+            BranchName = editableStore.BranchName,
+            CityName = editableStore.CityName,
+            Phone = editableStore.Phone,
+            Status = editableStore.Status,
+            Address = editableStore.Address,
+            TaxCode = editableStore.TaxCode,
+            Description = editableStore.Description,
+            CompanyId = existingCompany.Id,
+            Company = existingCompany,
+        };
+
         try
         {
-            newStore = new Store()
-            {
-                BranchCode = editableStore.BranchCode,
-                BranchName = editableStore.BranchName,
-                CityName = editableStore.CityName,
-                Phone = editableStore.Phone,
-                Status = editableStore.Status,
-                Address = editableStore.Address,
-                Description = editableStore.Description,
-                CompanyId = existingCompany.Id,
-                Company = existingCompany,
-            };
-
             _context.Stores.Add(newStore);
             await _context.SaveChangesAsync();
         }
         catch (DbUpdateException ex)
         {
-            throw;
+            throw new Exception("Xəta baş verdi mağazanı əlavə edərkən.", ex);
         }
 
         return newStore;
     }
 
+    public async Task<bool> DeleteStore(Store editableStore)
+    {
+        try
+        {
+            var removedStore = _context.Stores.FirstOrDefault((s) => s.Id == editableStore.Id);
+
+            _context.Stores.Remove(removedStore);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message); ;
+        }
+    }
+
+    private void ValidateCode(string code, string fieldName, int minLength, int maxLength)
+    {
+        if (string.IsNullOrWhiteSpace(code))
+            throw new ArgumentException($"{fieldName} boş ola bilməz.");
+
+        if (!code.All(char.IsDigit))
+            throw new ArgumentException($"{fieldName} yalnız rəqəmlərdən ibarət olmalıdır.");
+
+        if (code.Length < minLength || code.Length > maxLength)
+            throw new ArgumentException($"{fieldName} uzunluğu {minLength}-dən {maxLength}-ə qədər olmalıdır.");
+    }
+
     public async Task<ObservableCollection<Store>> InitializeStoresAsync()
     {
-        var storeList = await _context.Stores
-            .Include(s => s.Company)
-            .ToListAsync();
+        using (var context = new PostAppContext())
+        {
+            var storeList = await context.Stores
+                .Include(s => s.Company)
+                .ToListAsync();
 
-        var observableStores = new ObservableCollection<Store>(storeList);
-        return observableStores;
+            return new ObservableCollection<Store>(storeList);
+        }
     }
 }

@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="PostTech.Views.WorkspaceView"
+﻿<UserControl x:Class="PosTech.Views.WorkspaceView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PostTech.Views"
+             xmlns:local="clr-namespace:PosTech.Views"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1200">
@@ -35,28 +35,37 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <Button
+                Command="{Binding OpenCompanyView}"
+                Style="{StaticResource MyButtonStyle}">
+                Şirkət
+            </Button>
+            
+            <Button
+                Grid.Column="1"
                 Command="{Binding OpenStoreView}"
                 Style="{StaticResource MyButtonStyle}">
                 Mağaza
             </Button>
 
             <Button
-                Grid.Column="1"
+                Grid.Column="2"
                 Style="{StaticResource MyButtonStyle}">
                 İstifadəçi
             </Button>
 
             <Button
-                Grid.Column="2"
+                Grid.Column="3"
                 Style="{StaticResource MyButtonStyle}">
                 İnteqrasiya
             </Button>
 
             <TextBlock
-                Grid.Column="3"
+                Grid.Column="4"
                 Text="Tarix Aralığı:"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -68,10 +77,10 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 CornerRadius="10"
-                Width="130"
+                Width="100"
                 Height="40"
                 Background="#052659"
-                Grid.Column="4">
+                Grid.Column="5">
                 <DatePicker
                     Width="90"
                     Height="35"
@@ -93,10 +102,10 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 CornerRadius="10"
-                Width="130"
+                Width="100"
                 Height="40"
                 Background="#052659"
-                Grid.Column="5">
+                Grid.Column="6">
                 <DatePicker
                     Width="90"
                     Height="35"
@@ -115,25 +124,25 @@
             </Border>
 
             <Button
-                Grid.Column="6"
+                Grid.Column="7"
                 Style="{StaticResource MyButtonStyle}">
                 Yenilə
             </Button>
 
             <Button
-                Grid.Column="7"
+                Grid.Column="8"
                 Style="{StaticResource MyButtonStyle}">
                 Kopya
             </Button>
 
             <Button
-                Grid.Column="8"
+                Grid.Column="9"
                 Style="{StaticResource MyButtonStyle}">
                 X Hesabat
             </Button>
 
             <Button
-                Grid.Column="9"
+                Grid.Column="10"
                 Style="{StaticResource MyButtonStyle}">
                 Günü Bağla
             </Button>

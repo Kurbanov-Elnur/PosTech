@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using PostTech.Messages;
-using PostTech.Services.Interfaces;
+using PosTech.Messages;
+using PosTech.Services.Interfaces;
 
-namespace PostTech.Services.Classes;
+namespace PosTech.Services.Classes;    
 
 class DataService : IDataService
 {

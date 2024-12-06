@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace PosTech.Services.Interfaces;
 
-interface IStoresService
+interface ICompanyService
 {
-    public Task<Store> AddStore(Store newStore);
-    public Task<bool> DeleteStore(Store store);
-    public Task<ObservableCollection<Store>> InitializeStoresAsync();
+    public Task<Company> AddCompany(Company newCompany);
+    public Task<ObservableCollection<Company>> InitializeCompanyAsync();
 }

@@ -1,15 +1,13 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using PosTech.Services.Classes;
 using PosTech.Services.Interfaces;
-using PostTech.Data.Contexts;
-using PostTech.Services.Classes;
-using PostTech.Services.Interfaces;
-using PostTech.ViewModels;
-using PostTech.Views;
+using PosTech.ViewModels;
+using PosTech.Data.Contexts;
+using PosTech.Views;
 using SimpleInjector;
 using System.Windows;
 
-namespace PostTech;
+namespace PosTech;
 
 public partial class App : Application
 {
@@ -25,11 +23,13 @@ public partial class App : Application
         Container.RegisterSingleton<IDataService, DataService>();
         Container.RegisterSingleton<IUserService, UserService>();
         Container.RegisterSingleton<IStoresService, StoresService>();
+        Container.RegisterSingleton<ICompanyService, CompanyService>();
 
         Container.RegisterSingleton<MainViewModel>();
         Container.RegisterSingleton<LoginViewModel>();
         Container.RegisterSingleton<WorkspaceViewModel>();
         Container.RegisterSingleton<StoreViewModel>();
+        Container.RegisterSingleton<CompanyViewModel>();
         Container.RegisterSingleton<UsersViewModel>();
 
         Container.Verify();

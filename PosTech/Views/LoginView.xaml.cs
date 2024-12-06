@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PostTech.Views
+namespace PosTech.Views
 {
     public partial class LoginView : UserControl
     {

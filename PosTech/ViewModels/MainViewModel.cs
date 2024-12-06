@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using PostTech.Messages;
+using PosTech.Messages;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostTech.ViewModels;
+namespace PosTech.ViewModels;
 
 class MainViewModel : BindableBase
 {

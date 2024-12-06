@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostTech.ViewModels;
+namespace PosTech.ViewModels;
 
 class UsersViewModel : BindableBase
 {

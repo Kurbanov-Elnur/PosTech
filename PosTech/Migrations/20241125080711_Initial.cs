@@ -17,8 +17,7 @@ namespace PosTech.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CompanyCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CompanyName = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TaxCode = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    CompanyName = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,6 +75,7 @@ namespace PosTech.Migrations
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaxCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CompanyId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -103,12 +103,6 @@ namespace PosTech.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Companies_TaxCode",
-                table: "Companies",
-                column: "TaxCode",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ReceiptDatas_DocumentNo",
                 table: "ReceiptDatas",
                 column: "DocumentNo",
@@ -118,6 +112,12 @@ namespace PosTech.Migrations
                 name: "IX_Stores_CompanyId",
                 table: "Stores",
                 column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Stores_TaxCode",
+                table: "Stores",
+                column: "TaxCode",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Username",

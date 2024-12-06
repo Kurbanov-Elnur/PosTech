@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualBasic.Logging;
-using PostTech.Data.Models;
-using PostTech.Services.Interfaces;
+using PosTech.Data.Models;
+using PosTech.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace PostTech.ViewModels;
+namespace PosTech.ViewModels;
 
 class WorkspaceViewModel : BindableBase
 {
@@ -86,11 +86,17 @@ class WorkspaceViewModel : BindableBase
             DeliveryDate = DateTime.Now
         });
 
-        OpenStoreView = new DelegateCommand(async () =>
+        OpenStoreView = new DelegateCommand(() =>
         {
             _navigationService.NavigateTo<StoreViewModel>();
+        });
+        
+        OpenCompanyView = new DelegateCommand(() =>
+        {
+            _navigationService.NavigateTo<CompanyViewModel>();
         });
     }
 
     public DelegateCommand OpenStoreView { get; private set; }
+    public DelegateCommand OpenCompanyView { get; private set; }
 }

@@ -1,6 +1,4 @@
-﻿using PosTech.Data.Models;
-
-namespace PostTech.Data.Models;
+﻿namespace PosTech.Data.Models;
 
 public class Store
 {
@@ -11,6 +9,7 @@ public class Store
     public string Phone { get; set; }
     public string Status { get; set; }
     public string Address { get; set; }
+    public string TaxCode { get; set; }
     public string Description { get; set; }
 
     public string CompanyId { get; set; }

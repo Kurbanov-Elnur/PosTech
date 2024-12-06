@@ -4,9 +4,94 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PosTech.Views"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+          d:DesignHeight="650" d:DesignWidth="1200">
     <Grid>
+        <Border CornerRadius="0 0 20 20" Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="0.7"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
 
+        <Grid Width="1000" Height="300">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Cursor="Hand" Height="60" Background="Transparent" BorderBrush="Transparent" Command="{Binding Back}">
+                <md:PackIcon Kind="ArrowLeftBoldCircleOutline" Width="30" Height="30" Foreground="White"/>
+            </Button>
+
+            <Label Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center">
+                Şirkət İdarə
+            </Label>
+
+            <Border Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Width="245" VerticalAlignment="Center" Height="116" Grid.RowSpan="5" Background="#3A2F90" CornerRadius="10">
+                <ListBox ItemsSource="{Binding Companies}" SelectedItem="{Binding SelectedCompany}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding CompanyCode}" Foreground="White" FontSize="18" HorizontalAlignment="Center" Margin="10 0 0 0"/>
+                                <TextBlock Text="{Binding CompanyName}" Foreground="White" FontSize="18" HorizontalAlignment="Center" Margin="10 0 0 0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+
+            <Grid Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Width="80" Style="{StaticResource MyButtonStyle}" Command="{Binding AddCompany}">
+                    Əlavə Et
+                </Button>
+
+                <Button Grid.Column="1" Width="80" Style="{StaticResource MyButtonStyle}" Command="{Binding RemoveCompany}">
+                    Sil
+                </Button>
+
+                <Button Grid.Column="2" Width="80" Style="{StaticResource MyButtonStyle}">
+                    Yadda Saxla
+                </Button>
+            </Grid>
+
+            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="19" Margin="0 0 18 0" Foreground="White">
+                Şirkət Kodu:
+            </Label>
+
+            <Border Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource MyInputBorderStyle}">
+                <TextBox Text="{Binding EditableCompany.CompanyCode}" Style="{StaticResource MyInputTextBoxStyle}"/>
+            </Border>
+
+            <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Margin="0 0 18 0" Foreground="White">
+                Şirkət Adı:
+            </Label>
+
+            <Border Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource MyInputBorderStyle}">
+                <TextBox Text="{Binding EditableCompany.CompanyName}" Style="{StaticResource MyInputTextBoxStyle}"/>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

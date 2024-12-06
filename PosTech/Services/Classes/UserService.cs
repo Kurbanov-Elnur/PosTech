@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PostTech.Data.Contexts;
-using PostTech.Data.Models;
-using PostTech.Services.Interfaces;
+using PosTech.Data.Contexts;
+using PosTech.Data.Models;
+using PosTech.Services.Interfaces;
 using System.Text.RegularExpressions;
 using System.Windows;
 
-namespace PostTech.Services.Classes;
+namespace PosTech.Services.Classes;
 
 class UserService : IUserService
 {

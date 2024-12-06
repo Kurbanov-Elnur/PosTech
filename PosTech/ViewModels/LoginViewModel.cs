@@ -1,8 +1,8 @@
-﻿using PostTech.Services.Interfaces;
+﻿using PosTech.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 
-namespace PostTech.ViewModels;
+namespace PosTech.ViewModels;
 
 internal class LoginViewModel : BindableBase
 {

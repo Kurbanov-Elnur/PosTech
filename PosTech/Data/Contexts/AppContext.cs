@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using PosTech.Data.Models;
-using PostTech.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace PostTech.Data.Contexts;
+namespace PosTech.Data.Contexts;
 
 class PostAppContext : DbContext
 {
@@ -70,12 +69,6 @@ class PostAppContext : DbContext
         companies.Property(c => c.CompanyName)
                .IsRequired();
 
-        companies.Property(s => s.TaxCode)
-            .IsRequired();
-
-        companies.HasIndex(s => s.TaxCode)
-            .IsUnique();
-
         companies.HasIndex(c => c.CompanyName).IsUnique();
 
         //Store Data DB
@@ -98,6 +91,12 @@ class PostAppContext : DbContext
 
         stores.Property(s => s.Address)
             .IsRequired();
+
+        stores.Property(s => s.TaxCode)
+            .IsRequired();
+
+        stores.HasIndex(s => s.TaxCode)
+            .IsUnique();
 
         stores.Property(s => s.Description);
 

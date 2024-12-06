@@ -1,4 +1,4 @@
-﻿namespace PostTech.Data.Models;
+﻿namespace PosTech.Data.Models;
 
 class User
 {
